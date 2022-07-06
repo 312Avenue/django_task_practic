@@ -10,4 +10,4 @@ class Review(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
     text = models.TextField()
-    rating = models.IntegerChoices('Place', 'Low Normal High Best TheBest')
+    rating = models.PositiveSmallIntegerField(null=True, blank=True)
