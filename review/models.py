@@ -11,3 +11,6 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
     text = models.TextField()
     rating = models.PositiveSmallIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.author} rating for: {self.product}'
