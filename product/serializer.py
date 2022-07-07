@@ -17,7 +17,13 @@ class ProductSerializer(ReviewSerializer, serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['rating'] = ReviewSerializer(instance.review.all(), many=True).data
-        return rep
+        rat = [dict(i)['rating'] for i in rep['rating']]
+        if rat:
+            rep['rating'] = round((sum(rat) / len(rat)), 2)
+            return rep
+        else:
+            rep['rating'] = None
+            return rep
 
 
 class ReviewSerializer(serializers.ModelSerializer):
